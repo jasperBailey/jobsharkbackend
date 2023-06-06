@@ -39,7 +39,7 @@ public class JobsharkApplicationTests {
 	public void canSave() {
 		sarah = new User("sarah@jobshark.com", "Sarah_1", "Edinburgh", "Technology");
 		userRepository.save(sarah);
-		newJob = new Job(sarah, 1, "Developer", "Reed", "Edinburgh", LocalDate.of(2014, Month.JANUARY, 1), "Fun", 28000, 35000, null, "www.reed.co.uk", null, false, true, "permanent", 7);
+		newJob = new Job(sarah, 1L, "Developer", "Reed", "Edinburgh", LocalDate.of(2014, Month.JANUARY, 1), "Fun", 28000, 35000, null, "www.reed.co.uk", null, false, true, "permanent", 7);
 		jobRepository.save(newJob);
 
 	}

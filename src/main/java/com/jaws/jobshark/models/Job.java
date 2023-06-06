@@ -1,8 +1,7 @@
 package com.jaws.jobshark.models;
 
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="jobs")
@@ -28,13 +27,13 @@ public class Job {
     private String location;
 
     @Column(name="expiration_date")
-    private LocalDateTime expirationDate;
+    private LocalDate expirationDate;
 
     @Column(name="job_description")
     private String jobDescription;
 
     @Column(name="min_salary")
-    private Integer MinSalary;
+    private Integer minSalary;
 
     @Column(name="max_salary")
     private Integer maxSalary;
@@ -45,7 +44,7 @@ public class Job {
     @Column(name="reed_url")
     private String reedUrl;
 
-    @Column(name="enternal_url")
+    @Column(name="external_url")
     private String external_url;
 
     @Column(name="part_time")
@@ -64,7 +63,7 @@ public class Job {
     public Job() {
     }
 
-    public Job( User user, Long reedId, String jobTitle, String employerName, String location, LocalDateTime expirationDate, String jobDescription, Integer minSalary, Integer maxSalary, String notes, String reedUrl, String external_url, Boolean partTime, Boolean fullTime, String contractType, Integer applicationCount) {
+    public Job(User user, Long reedId, String jobTitle, String employerName, String location, LocalDate expirationDate, String jobDescription, Integer minSalary, Integer maxSalary, String notes, String reedUrl, String external_url, Boolean partTime, Boolean fullTime, String contractType, Integer applicationCount) {
         this.user = user;
         this.reedId = reedId;
         this.jobTitle = jobTitle;
@@ -72,7 +71,7 @@ public class Job {
         this.location = location;
         this.expirationDate = expirationDate;
         this.jobDescription = jobDescription;
-        MinSalary = minSalary;
+        this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.notes = notes;
         this.reedUrl = reedUrl;
@@ -131,11 +130,11 @@ public class Job {
         this.location = location;
     }
 
-    public LocalDateTime getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDateTime expirationData) {
+    public void setExpirationDate(LocalDate expirationData) {
         this.expirationDate = expirationData;
     }
 
@@ -143,16 +142,16 @@ public class Job {
         return jobDescription;
     }
 
-    public void setJobDescription(String jobDebscription) {
-        this.jobDescription = jobDebscription;
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
     }
 
     public Integer getMinSalary() {
-        return MinSalary;
+        return this.minSalary;
     }
 
     public void setMinSalary(Integer minSalary) {
-        MinSalary = minSalary;
+        this.minSalary = minSalary;
     }
 
     public Integer getMaxSalary() {
