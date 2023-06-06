@@ -11,9 +11,9 @@ public class Job {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn (name="user_id", nullable = false)
-//    private User user;
+    @ManyToOne
+    @JoinColumn (name="user_id", nullable = false)
+    private User user;
 
     @Column(name = "reed_id")
     private Long reedId;
@@ -64,8 +64,8 @@ public class Job {
     public Job() {
     }
 
-    public Job( Long reedId, String jobTitle, String employerName, String location, LocalDateTime expirationDate, String jobDescription, Integer minSalary, Integer maxSalary, String notes, String reedUrl, String external_url, Boolean partTime, Boolean fullTime, String contractType, Integer applicationCount) {
-//        this.user = user;
+    public Job( User user, Long reedId, String jobTitle, String employerName, String location, LocalDateTime expirationDate, String jobDescription, Integer minSalary, Integer maxSalary, String notes, String reedUrl, String external_url, Boolean partTime, Boolean fullTime, String contractType, Integer applicationCount) {
+        this.user = user;
         this.reedId = reedId;
         this.jobTitle = jobTitle;
         this.employerName = employerName;
@@ -90,14 +90,14 @@ public class Job {
     public void setId(Long id) {
         this.id = id;
     }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getReedId() {
         return reedId;
