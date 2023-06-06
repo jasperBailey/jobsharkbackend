@@ -1,12 +1,13 @@
 package com.jaws.jobshark;
 
 import com.jaws.jobshark.models.User;
+import com.jaws.jobshark.models.Job;
+import com.jaws.jobshark.repositories.JobRepository;
 import com.jaws.jobshark.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,10 +16,10 @@ import java.time.Month;
 public class JobsharkApplicationTests {
 
 	@Autowired
-			JobRepository jobRepository;
+	JobRepository jobRepository;
 
 	@Autowired
-			UserRepository userRepository;
+	UserRepository userRepository;
 
 
 	Job newJob;
@@ -29,11 +30,12 @@ public class JobsharkApplicationTests {
 	}
 
 	@Test
-
 	public void createUser() {
 		User jeremy = new User("jeremy@gmail.com", "Jezza", "Croydon", "music");
 		userRepository.save(jeremy);
+	}
 
+	@Test
 	public void canSave() {
 		sarah = new User("sarah@jobshark.com", "Sarah_1", "Edinburgh", "Technology");
 		userRepository.save(sarah);
