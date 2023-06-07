@@ -1,6 +1,10 @@
 auth0:
   audience: jobshark/
 spring:
+  datasource:
+  url: jdbc:postgresql://google/<DATABASE_NAME>?cloudSqlInstance=<INSTANCE_CONNECTION_NAME>&socketFactory=com.google.cloud.sql.postgres.SocketFactory&user=<USERNAME>&password=<PASSWORD>
+  jpa:
+  database-platform: org.hibernate.dialect.PostgreSQL9Dialect
   security:
     oauth2:
       resourceserver:
