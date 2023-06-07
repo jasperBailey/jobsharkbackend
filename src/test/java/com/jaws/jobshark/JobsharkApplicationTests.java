@@ -41,7 +41,7 @@ public class JobsharkApplicationTests {
 		userRepository.save(sarah);
 		newJob = new Job(sarah, 1L, "Developer", "Reed", "Edinburgh", LocalDate.of(2014, Month.JANUARY, 1), "Fun", 28000, 35000, null, "www.reed.co.uk", null, false, true, "permanent", 7);
 		jobRepository.save(newJob);
-
+		sarah.addJob(newJob);
 	}
 
 }
