@@ -1,6 +1,10 @@
 package com.jaws.jobshark.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -18,6 +22,10 @@ public class User {
     private String location;
     @Column(name="industry")
     private String industry;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties({"user"})
+    private List<Job> jobs;
+
 
 
     public User(String email, String display_name, String location, String industry){
@@ -25,12 +33,26 @@ public class User {
         this.display_name = display_name;
         this.location = location;
         this.industry = industry;
+        this.jobs = new ArrayList<>();
     }
 
     public User(){
     }
 
-    public User(String jeremy) {
+    public List<Job> getJobs() {
+        return this.jobs;
+    }
+
+    public void setJobs(ArrayList<Job> jobs) {
+        this.jobs = jobs;
+    }
+
+    public void addJob(Job job){
+        this.jobs.add(job);
+    }
+
+    public void removeJob(Job job){
+        this.jobs.remove(job);
     }
 
     public Long getId() {
