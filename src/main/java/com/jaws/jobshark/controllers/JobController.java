@@ -33,8 +33,9 @@ public class JobController {
     }
 
     @DeleteMapping(value = "/jobs/delete/{id}")
-    public void deleteById(@PathVariable Long id){
+    public ResponseEntity<Long> deleteById(@PathVariable Long id){
         jobRepository.deleteById(id);
+        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
     }
 
 }
