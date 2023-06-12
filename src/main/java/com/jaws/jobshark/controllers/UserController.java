@@ -31,6 +31,12 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "/users/delete")
+    public ResponseEntity<String> deleteAll(){
+        userRepository.deleteAll();
+        return new ResponseEntity<>("Heck yeah we deleted all our user data ^_^", HttpStatus.NO_CONTENT);
+    }
+
 
 
 }

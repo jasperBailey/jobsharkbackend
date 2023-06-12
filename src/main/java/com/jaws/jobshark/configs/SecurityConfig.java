@@ -14,16 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    //    @Bean
-    //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    //        http.authorizeRequests()
-    //                .mvcMatchers("/jobs/**").authenticated()
-    //                .mvcMatchers("/users/**").authenticated()
-    //                .and().cors()
-    //                .and().oauth2ResourceServer().jwt();
-    //        return http.build();
-    //    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authz -> authz.anyRequest().authenticated());

@@ -62,11 +62,16 @@ public class Job {
     @Column(name="application_count")
     private Integer applicationCount;
 
+    @Column(name="application_stage")
+    private ApplicationStage applicationStage;
+
+    @Column(name="rejected")
+    private Boolean rejected;
 
     public Job() {
     }
 
-    public Job(User user, Long reedId, String jobTitle, String employerName, String location, LocalDate expirationDate, String jobDescription, Integer minSalary, Integer maxSalary, String notes, String reedUrl, String external_url, Boolean partTime, Boolean fullTime, String contractType, Integer applicationCount) {
+    public Job(User user, Long reedId, String jobTitle, String employerName, String location, LocalDate expirationDate, String jobDescription, Integer minSalary, Integer maxSalary, String notes, String reedUrl, String external_url, Boolean partTime, Boolean fullTime, String contractType, Integer applicationCount, ApplicationStage applicationStage, Boolean rejected) {
         this.user = user;
         this.reedId = reedId;
         this.jobTitle = jobTitle;
@@ -83,6 +88,8 @@ public class Job {
         this.fullTime = fullTime;
         this.contractType = contractType;
         this.applicationCount = applicationCount;
+        this.applicationStage = applicationStage;
+        this.rejected = rejected;
     }
 
     public Long getId() {
@@ -189,22 +196,6 @@ public class Job {
         this.external_url = external_url;
     }
 
-    public boolean isPartTime() {
-        return partTime;
-    }
-
-    public void setPartTime(boolean partTime) {
-        this.partTime = partTime;
-    }
-
-    public boolean isFullTime() {
-        return fullTime;
-    }
-
-    public void setFullTime(boolean fullTime) {
-        this.fullTime = fullTime;
-    }
-
     public String getContractType() {
         return contractType;
     }
@@ -219,6 +210,38 @@ public class Job {
 
     public void setApplicationCount(Integer applicationCount) {
         this.applicationCount = applicationCount;
+    }
+
+    public Boolean getPartTime() {
+        return partTime;
+    }
+
+    public void setPartTime(Boolean partTime) {
+        this.partTime = partTime;
+    }
+
+    public Boolean getFullTime() {
+        return fullTime;
+    }
+
+    public void setFullTime(Boolean fullTime) {
+        this.fullTime = fullTime;
+    }
+
+    public ApplicationStage getApplicationStage() {
+        return applicationStage;
+    }
+
+    public void setApplicationStage(ApplicationStage applicationStage) {
+        this.applicationStage = applicationStage;
+    }
+
+    public Boolean getRejected() {
+        return rejected;
+    }
+
+    public void setRejected(Boolean rejected) {
+        this.rejected = rejected;
     }
 }
 

@@ -25,15 +25,18 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties({"user"})
     private List<Job> jobs;
+    @Column(name="sid")
+    private String sid;
 
 
 
-    public User(String email, String display_name, String location, String industry){
+    public User(String email, String display_name, String location, String industry, String sid){
         this.email = email;
         this.display_name = display_name;
         this.location = location;
         this.industry = industry;
         this.jobs = new ArrayList<>();
+        this.sid = sid;
     }
 
     public User(){
@@ -93,5 +96,13 @@ public class User {
 
     public void setIndustry(String industry) {
         this.industry = industry;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }

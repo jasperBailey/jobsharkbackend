@@ -19,24 +19,30 @@ public class JobController {
 
     @GetMapping(value = "/jobs")
     public ResponseEntity<List<Job>> showAll(){
-        return new ResponseEntity<>(jobRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity(jobRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/jobs/{id}")
-    public ResponseEntity<Optional<Job>> findById(@PathVariable Long id){
-        return new ResponseEntity<>(jobRepository.findById(id), HttpStatus.OK);
+    @GetMapping(value = "/jobs/{sid}")
+    public ResponseEntity<Optional<List<Job>>> findById(@PathVariable String sid){
+        return new ResponseEntity(jobRepository.findByUserSid(sid), HttpStatus.OK);
     }
 
     @PostMapping(value = "/jobs")
     public ResponseEntity<Job> postJob(@RequestBody Job job){
         jobRepository.save(job);
-        return new ResponseEntity<>(job, HttpStatus.CREATED);
+        return new ResponseEntity(job, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/jobs/delete/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id){
         jobRepository.deleteById(id);
-        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        return new ResponseEntity(id, HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping(value = "/jobs/delete")
+    public ResponseEntity<String> deleteAll(){
+        jobRepository.deleteAll();
+        return new ResponseEntity("Heck yeah we deleted all our job data ^_^", HttpStatus.NO_CONTENT);
     }
 
 }
