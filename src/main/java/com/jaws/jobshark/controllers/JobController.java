@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,9 +45,10 @@ public class JobController {
     }
 
     @PatchMapping(value="/users/{sid}/jobs/{id}")
-    public ResponseEntity<Optional<Job>> updateStage(@PathVariable Long id, @RequestBody ApplicationStage stage){
+    public ResponseEntity<Optional<Job>> updateStage(@PathVariable Long id, @RequestBody ApplicationStage stage, @RequestBody Date date){
         Optional<Job> job = jobRepository.findById(id);
         job.ifPresent(value -> value.setApplicationStage(stage));
+        job.ifPresent(value -> value.setDate(date));
         jobRepository.save(job.get());
         return new ResponseEntity<>(job, HttpStatus.OK);
     }

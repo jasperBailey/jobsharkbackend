@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name="jobs")
@@ -68,6 +69,11 @@ public class Job {
     @Column(name="rejected")
     private Boolean rejected;
 
+    @Column(name="date")
+    private Date date;
+
+
+
     public Job() {
     }
 
@@ -90,6 +96,7 @@ public class Job {
         this.applicationCount = applicationCount;
         this.applicationStage = applicationStage;
         this.rejected = rejected;
+        this.date = date;
     }
 
     public Long getId() {
@@ -242,6 +249,14 @@ public class Job {
 
     public void setRejected(Boolean rejected) {
         this.rejected = rejected;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
 
