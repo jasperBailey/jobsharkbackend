@@ -1,6 +1,5 @@
 package com.jaws.jobshark.controllers;
 
-import com.jaws.jobshark.models.Job;
 import com.jaws.jobshark.models.User;
 import com.jaws.jobshark.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ public class UserController {
     public ResponseEntity<Optional<User>> findById(@PathVariable Long id){
         return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
     }
-
 
     @PostMapping(value = "/users")
     public ResponseEntity<User> postUser(@RequestBody User user){

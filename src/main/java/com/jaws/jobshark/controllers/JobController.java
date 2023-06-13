@@ -38,6 +38,19 @@ public class JobController {
         return new ResponseEntity(jobList, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/users/{sid}/jobs/{id}")
+    public ResponseEntity<Optional<Job>> getJob(@PathVariable Long id){
+        return new ResponseEntity(jobRepository.findById(id), HttpStatus.OK);
+    }
+
+    @PatchMapping(value="/users/{sid}/jobs/{id}")
+    public ResponseEntity<Optional<Job>> updateStage(@PathVariable Long id, @RequestBody ApplicationStage stage){
+        Optional<Job> job = jobRepository.findById(id);
+        job.ifPresent(value -> value.setApplicationStage(stage));
+        jobRepository.save(job.get());
+        return new ResponseEntity<>(job, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/jobs/add")
     public ResponseEntity<Job> postJob(@RequestBody Job job){
         jobRepository.save(job);
