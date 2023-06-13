@@ -1,5 +1,6 @@
 package com.jaws.jobshark.controllers;
 
+import com.jaws.jobshark.models.ApplicationStage;
 import com.jaws.jobshark.models.Job;
 import com.jaws.jobshark.repositories.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -17,17 +19,26 @@ public class JobController {
     @Autowired
     JobRepository jobRepository;
 
-    @GetMapping(value = "/jobs")
-    public ResponseEntity<List<Job>> showAll(){
-        return new ResponseEntity(jobRepository.findAll(), HttpStatus.OK);
+    private List<Job> innerJoin(List<Job> list1, List<Job> list2) {
+        return list1.stream()
+                .filter(list2::contains)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/jobs/{sid}")
-    public ResponseEntity<Optional<List<Job>>> findById(@PathVariable String sid){
-        return new ResponseEntity(jobRepository.findByUserSid(sid), HttpStatus.OK);
+    @GetMapping(value = "/users/{sid}/jobs")
+    public ResponseEntity<Optional<List<Job>>> getFilteredJobs(@PathVariable String sid,
+                @RequestParam(name="stage", required = false) ApplicationStage stage){
+        List<Job> jobList = jobRepository.findByUserSid(sid);
+        List<Job> jobByStatus;
+
+        if(stage != null){
+            jobByStatus = jobRepository.findByApplicationStage(stage);
+            jobList = innerJoin(jobList, jobByStatus);
+        }
+        return new ResponseEntity(jobList, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/jobs")
+    @PostMapping(value = "/jobs/add")
     public ResponseEntity<Job> postJob(@RequestBody Job job){
         jobRepository.save(job);
         return new ResponseEntity(job, HttpStatus.CREATED);
