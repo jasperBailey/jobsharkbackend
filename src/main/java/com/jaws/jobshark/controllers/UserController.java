@@ -20,9 +20,9 @@ public class UserController {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable Long id){
-        return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
+    @GetMapping(value = "/users/{sid}")
+    public ResponseEntity<Optional<User>> findBySid(@PathVariable String sid){
+        return new ResponseEntity<>(userRepository.findBySid(sid), HttpStatus.OK);
     }
 
     @PostMapping(value = "/users")
