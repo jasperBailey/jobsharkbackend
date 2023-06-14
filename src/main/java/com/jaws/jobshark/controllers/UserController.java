@@ -20,15 +20,22 @@ public class UserController {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{sid}")
-    public ResponseEntity<Optional<User>> findBySid(@PathVariable String sid){
-        return new ResponseEntity<>(userRepository.findBySid(sid), HttpStatus.OK);
+    @GetMapping(value = "/users/{sub}")
+    public ResponseEntity<Optional<User>> findBySub(@PathVariable String sub){
+        return new ResponseEntity<>(userRepository.findBySub(sub), HttpStatus.OK);
     }
 
     @PostMapping(value = "/users")
     public ResponseEntity<User> postUser(@RequestBody User user){
-        userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        Optional<User> foundUser = userRepository.findBySub(user.getSub());
+        if ( foundUser.isEmpty() ) {
+            userRepository.save(user);
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(foundUser.get(), HttpStatus.I_AM_A_TEAPOT);
+        }
+
+
     }
 
     @DeleteMapping(value = "/users/delete")

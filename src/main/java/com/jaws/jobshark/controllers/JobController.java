@@ -26,10 +26,10 @@ public class JobController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/users/{sid}/jobs")
-    public ResponseEntity<Optional<List<Job>>> getFilteredJobs(@PathVariable String sid,
+    @GetMapping(value = "/users/{sub}/jobs")
+    public ResponseEntity<Optional<List<Job>>> getFilteredJobs(@PathVariable String sub,
                 @RequestParam(name="stage", required = false) ApplicationStage stage){
-        List<Job> jobList = jobRepository.findByUserSid(sid);
+        List<Job> jobList = jobRepository.findByUserSub(sub);
         List<Job> jobByStatus;
 
         if(stage != null){
@@ -39,12 +39,12 @@ public class JobController {
         return new ResponseEntity(jobList, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{sid}/jobs/{id}")
+    @GetMapping(value = "/users/{sub}/jobs/{id}")
     public ResponseEntity<Optional<Job>> getJob(@PathVariable Long id){
         return new ResponseEntity(jobRepository.findById(id), HttpStatus.OK);
     }
 
-    @PatchMapping(value="/users/{sid}/jobs/{id}")
+    @PatchMapping(value="/users/{sub}/jobs/{id}")
     public ResponseEntity<Optional<Job>> updateStage(@PathVariable Long id, @RequestBody ApplicationStage stage, @RequestBody Date date){
         Optional<Job> job = jobRepository.findById(id);
         job.ifPresent(value -> value.setApplicationStage(stage));
