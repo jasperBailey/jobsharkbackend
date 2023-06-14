@@ -39,12 +39,12 @@ public class JobController {
         return new ResponseEntity(jobList, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{sub}/jobs/{id}")
+    @GetMapping(value = "/jobs/{id}")
     public ResponseEntity<Optional<Job>> getJob(@PathVariable Long id){
         return new ResponseEntity(jobRepository.findById(id), HttpStatus.OK);
     }
 
-    @PatchMapping(value="/users/{sub}/jobs/{id}")
+    @PatchMapping(value="/jobs/{id}")
     public ResponseEntity<Optional<Job>> updateStage(@PathVariable Long id, @RequestBody ApplicationStage stage, @RequestBody Date date){
         Optional<Job> job = jobRepository.findById(id);
         job.ifPresent(value -> value.setApplicationStage(stage));
@@ -53,7 +53,7 @@ public class JobController {
         return new ResponseEntity<>(job, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/jobs/add")
+    @PostMapping(value = "/jobs")
     public ResponseEntity<Job> postJob(@RequestBody Job job){
         jobRepository.save(job);
         return new ResponseEntity(job, HttpStatus.CREATED);
